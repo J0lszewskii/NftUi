@@ -1,0 +1,28 @@
+Screen {
+    layout: vertical;
+    align: center top;
+    padding: 0;
+    offset: 0 0;
+}
+
+Label {
+    padding: 1 2;
+}
+
+.entry {
+    layout: horizontal;
+    padding: 1 2;
+    height: 15%;
+    Input {
+        width: 60%;
+    }
+
+    Button {
+        width: 20%;
+    }
+
+    Label {
+        width: 20%;
+    }
+
+}
