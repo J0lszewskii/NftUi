@@ -42,7 +42,6 @@ class MyApp(App):
             self.collection_name_input_field,
             Button("Wprowadź", name="submit_col_name", id="submit_col_name"),
             classes='entry'
-
         )
 
         self.label = Label("Wprowadź adres kontraktu")
@@ -59,7 +58,6 @@ class MyApp(App):
     
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        """Event handler called when a button is pressed."""
         if event.button.id == "submit_address":
             self.address = self.address_input_field.value
             self.label.update(f"Adres kontraktu: {self.address}")
