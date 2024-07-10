@@ -29,3 +29,13 @@ if x != []:
     st.write("Mintowanie zakończone")
     st.toast("Mintowanie zakończone")
     st.write(x)
+
+upload = st.file_uploader("Wybierz plik do wrzucenia")
+if upload:
+    with open(upload, "r") as f:
+        data = f.read()
+    st.write(data)
+    st.write("Plik wrzucony")
+
+
+
