@@ -24,6 +24,8 @@ confirm = st.button("Potwierdź")
 ipfs_client = getIPFSclient("api_keys")
 w3 = Web3(Web3.HTTPProvider('https://rpc-amoy.polygon.technology/'))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-mint_directory(folder_name, ipfs_client, collection_name, collection_description, contract_address, w3, wallet_address)
-
-
+x = mint_directory(folder_name, ipfs_client, collection_name, collection_description, contract_address, w3, wallet_address)
+if x != []:
+    st.write("Mintowanie zakończone")
+    st.toast("Mintowanie zakończone")
+    st.write(x)

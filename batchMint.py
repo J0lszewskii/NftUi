@@ -54,6 +54,9 @@ def mint_directory(directory, ipfs_client, collection_name, collection_descripti
     for file in files:
         reciept = mint(file, ipfs_client, collection_name, collection_description, contract_address, w3, to_address)
         print(f"minted {file}")
+        reciepts = []
+        reciepts.append(reciept)
+    return reciepts
 
 
 
