@@ -141,8 +141,8 @@ class MyApp(App):
             w3 = Web3(Web3.HTTPProvider('https://rpc-amoy.polygon.technology/'))
             w3.middleware_onion.inject(geth_poa_middleware, layer=0)
             mint_directory(self.folder_name, ipfs_client, self.col_name, self.col_desc, self.caddress, w3, self.address)
+            self.notify("Minting completed", title='Complete', severity='information')
 
-            
 
         
         if self.sum == 6:
