@@ -59,19 +59,30 @@ class MyApp(App):
             classes="entry",
         )
         yield self.cdh
+        self.cadress_input_field = Input(name="caddress", id="caddress")
+        self.cadh = Horizontal(
+            Label("Podaj adres kontraktu"),
+            self.cadress_input_field,
+            Button("Wprowadź", name="submit_caddress", id="submit_caddress"),
+            classes="entry",
+        )
+        yield self.cadh
+
         
 
 
-        self.label = Label("Wprowadź adres kontraktu")
+        self.label = Label("Wprowadź adres portfela")
         self.label2 = Label("Wprowadź klucz prywatny")
         self.label3 = Label("Wprowadź nazwę folderu")
         self.label4 = Label("Wprowadź nazwę kolekcji")
         self.label5 = Label("Wprowadź opis kolekcji")
+        self.label6 = Label("Wprowadź adres kontraktu")
         yield self.label
         yield self.label2
         yield self.label3
         yield self.label4
         yield self.label5
+        yield self.label6
 
         self.confirm_button = Button("Potwierdź", name="confirm", id="confirm")
         yield self.confirm_button
@@ -83,7 +94,7 @@ class MyApp(App):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "submit_address":
             self.address = self.address_input_field.value
-            self.label.update(f"Adres kontraktu: {self.address}")
+            self.label.update(f"Adres portfela: {self.address}")
             self.address_input_field.disabled = True
             self.a1h.remove()
             self.sum += 1
@@ -111,6 +122,13 @@ class MyApp(App):
             self.label5.update(f"Opis kolekcji: {self.col_desc}")
             self.cdh.remove()
             self.sum += 1
+        if event.button.id == "submit_caddress":
+            self.caddress = self.cadress_input_field.value
+            self.cadress_input_field.disabled = True
+            self.label6.update(f"Adres kontraktu: {self.caddress}")
+            self.cadh.remove()
+            self.sum += 1
+        
         if event.button.id == 'confirm':
             self.label.remove()
             self.label2.remove()
@@ -122,11 +140,11 @@ class MyApp(App):
             ipfs_client = getIPFSclient("api_keys")
             w3 = Web3(Web3.HTTPProvider('https://rpc-amoy.polygon.technology/'))
             w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-            mint_directory(self.folder_name, ipfs_client, self.col_name, self.col_desc, "0xf3C5d6ea982836b431478198E54A682D04891e49", w3, "0x9Bb1211E790013227703BbBAb11cd8A08e62b6dc")
+            mint_directory(self.folder_name, ipfs_client, self.col_name, self.col_desc, self.caddress, w3, self.address)
 
             
 
         
-        if self.sum == 5:
+        if self.sum == 6:
             self.confirm_button.visible = True
 MyApp().run()
